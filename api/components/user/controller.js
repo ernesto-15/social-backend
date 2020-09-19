@@ -1,11 +1,26 @@
-const store = require('../../../store/dummy')
+const nanoid = require('nanoid');
+const TABLE = 'user';
 
-const TABLE = 'user'
+module.exports = (store = require('../../../store/dummy')) => {
+  function list() {
+    return store.list(TABLE);
+  }
 
-function list() {
-  return store.list(TABLE)
-}
+  function get(id) {
+    return store.get(TABLE, id);
+  }
 
-module.exports = {
-  list,
-}
+  function upsert({id, name}) {
+    const user = {
+      name,
+      id: id ? id : nanoid()
+    }
+    return store.upsert(TABLE, user)
+  }
+
+  return {
+    list,
+    get,
+    upsert,
+  };
+};
