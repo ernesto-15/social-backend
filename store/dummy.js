@@ -17,13 +17,21 @@ async function get(table, id) {
 }
 
 async function upsert(table, data) {
-  const createdUser = db[table].push(data);
-  console.log(db)
-  return createdUser
+  if (!db[table]) {
+    db[table] = [];
+  }
+  db[table].push(data);
+  console.log(db);
 }
 
 async function remove(table, id) {
   return true;
+}
+
+async function query(table, q) {
+  const collection = await list(table);
+  let keys = Object.keys(q)
+  return collection.filter((item) => item[keys[0]] === q[keys[0]])[0] || null;
 }
 
 module.exports = {
@@ -31,4 +39,5 @@ module.exports = {
   get,
   upsert,
   remove,
+  query,
 };
