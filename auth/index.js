@@ -48,7 +48,6 @@ const check = {
   //Check token's id with body's id
   own: function check(req, owner) {
     const decoded = decodeHeader(req);
-    console.log(decoded);
     if(decoded.id !== owner) {
       throw error('You cannot do that', 401)
     }

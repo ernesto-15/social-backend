@@ -2,6 +2,6 @@
 const controller = require('./controller')
 
 //*Store (Database)
-const store = require('../../../store/dummy')
+const store = require('../../../store/mysql')
 
-module.exports = controller()
+module.exports = controller(store)

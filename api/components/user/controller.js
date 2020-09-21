@@ -6,7 +6,7 @@ const { nanoid } = require('nanoid');
 //Auth component
 const auth = require('../auth');
 
-const TABLE = 'user';
+const TABLE = 'users';
 
 //*Internal functions
 module.exports = (store = require('../../../store/dummy')) => {

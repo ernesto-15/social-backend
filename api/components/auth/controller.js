@@ -15,10 +15,11 @@ module.exports = (store = require('../../../store/dummy')) => {
   //Login
   async function login(username, password) {
     const data = await store.query(TABLE, { username: username });
+    console.log(data)
     const correct = await bcrypt.compare(password, data.password);
     if (correct) {
       //Generate token
-      return auth.sign(data);
+      return auth.sign({...data});
     } else {
       throw error('Invalid information', 401);
     }
