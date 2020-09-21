@@ -1,6 +1,9 @@
 //*Express
 const express = require('express')
 
+//*Authentication - user
+const secure = require('./secure')
+
 //*Responses
 const response = require('../../../network/response')
 
@@ -12,6 +15,7 @@ const router = express.Router()
 router.get('/', list)
 router.get('/:id', get)
 router.post('/', upsert)
+router.put('/', secure('update'), upsert)
 
 //*Internal Functions
 //List

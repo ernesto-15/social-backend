@@ -1,8 +1,16 @@
+//*Dependencies
+//Bcrypt
 const bcrypt = require('bcrypt');
+
+//*External files
+//Auth layer
 const auth = require('../../../auth');
+
 const TABLE = 'auth';
 
+//*Internal functions
 module.exports = (store = require('../../../store/dummy')) => {
+  //Login
   async function login(username, password) {
     const data = await store.query(TABLE, { username: username });
     const correct = await bcrypt.compare(password, data.password);
@@ -14,6 +22,7 @@ module.exports = (store = require('../../../store/dummy')) => {
     }
   }
 
+  //Upsert id, username and password
   async function upsert(data) {
     const authData = {
       id: data.id,

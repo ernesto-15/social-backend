@@ -12,6 +12,8 @@ const swaggerDocs = require('./swagger.json')
 //Routes
 const user = require('../api/components/user/network');
 const auth = require('../api/components/auth/network');
+//Errors
+const {error, notFound} = require('../network/error')
 
 //Express initialization
 const app = express();
@@ -24,6 +26,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/user', user);
 app.use('/api/auth', auth);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
+
+//*Errors
+app.use(notFound)
+app.use(error)
 
 //*Serve Api
 app.listen(api.port, () => {

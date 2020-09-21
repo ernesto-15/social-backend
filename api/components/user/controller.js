@@ -1,16 +1,26 @@
+//*Dependencies
+//Nanoid
 const { nanoid } = require('nanoid');
+
+//*External files
+//Auth component
 const auth = require('../auth');
+
 const TABLE = 'user';
 
+//*Internal functions
 module.exports = (store = require('../../../store/dummy')) => {
+  //List
   function list() {
     return store.list(TABLE);
   }
 
+  //Get
   function get(id) {
     return store.get(TABLE, id);
   }
 
+  //Upsert
   async function upsert({ id, name, username, password }) {
     const user = {
       id: id ? id : nanoid(),
