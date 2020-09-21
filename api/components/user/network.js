@@ -19,33 +19,33 @@ router.put('/', secure('update'), upsert)
 
 //*Internal Functions
 //List
-async function list(req, res) {
+async function list(req, res, next) {
   try {
     const list = await controller.list()
     response.success(req, res, list, 200)
   } catch (error) {
-    response.error(req, res, error.message, 500)
+    next(error)
   }
 }
 
 //Get
-async function get(req, res) {
+async function get(req, res, next) {
   try {
     const user = await controller.get(req.params.id)
     response.success(req, res, user, 200)
   } catch (error) {
-    response.error(req, res, error.message, 500)
+    next(error)
   }
 }
 
 //Upsert
-async function upsert(req,res) {
+async function upsert(req, res, next) {
   try {
     const createdUser = await controller.upsert(req.body)
     response.success(req, res, createdUser, 200)
     
   } catch (error) {
-    response.error(req, res, error.message, 500)
+    next(error)
   }
 }
 

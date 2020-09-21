@@ -13,12 +13,12 @@ router.post('/login', login);
 
 //*Internal Functions
 //Login
-async function login(req, res) {
+async function login(req, res, next) {
   try {
     const token = await controller.login(req.body.username, req.body.password);
     response.success(req, res, token, 200);
   } catch (error) {
-    response.error(req, res, 'Invalid information', 400);
+    next(error)
   }
 }
 

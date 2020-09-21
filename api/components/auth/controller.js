@@ -5,6 +5,8 @@ const bcrypt = require('bcrypt');
 //*External files
 //Auth layer
 const auth = require('../../../auth');
+//Error util
+const error = require('../../../utils/error')
 
 const TABLE = 'auth';
 
@@ -18,7 +20,7 @@ module.exports = (store = require('../../../store/dummy')) => {
       //Generate token
       return auth.sign(data);
     } else {
-      throw new Error('Invalid information');
+      throw error('Invalid information', 401);
     }
   }
 

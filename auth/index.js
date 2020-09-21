@@ -1,7 +1,7 @@
 //*JWT
 const jwt = require('jsonwebtoken');
 
-//*Error middleware
+//*Error util
 const error = require('../utils/error')
 
 //*Configuration
