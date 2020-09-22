@@ -1,3 +1,4 @@
+const { format } = require('mysql');
 //*Dependencies
 //Nanoid
 const { nanoid } = require('nanoid');
@@ -35,13 +36,27 @@ module.exports = (store = require('../../../store/dummy')) => {
         password,
       });
     }
-
     return store.upsert(TABLE, user);
+  }
+
+  //Follow
+  async function follow(from, to) {
+    return store.upsert(`${TABLE}_follow`, {
+      user_from: from,
+      user_to: to,
+    });
+  }
+
+  //Followers
+  async function followers(id) {
+    return store.query(`${TABLE}_follow`, { user_to: id });
   }
 
   return {
     list,
     get,
     upsert,
+    follow,
+    followers,
   };
 };

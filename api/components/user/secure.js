@@ -10,7 +10,11 @@ module.exports = (action) => {
       case 'update':
         const owner = req.body.id;
         auth.check.own(req, owner);
-        next()
+        next();
+        break;
+      case 'follow':
+        auth.check.logged(req);
+        next();
         break;
       default:
         next();

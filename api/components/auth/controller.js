@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 //Auth layer
 const auth = require('../../../auth');
 //Error util
-const error = require('../../../utils/error')
+const error = require('../../../utils/error');
 
 const TABLE = 'auth';
 
@@ -15,11 +15,10 @@ module.exports = (store = require('../../../store/dummy')) => {
   //Login
   async function login(username, password) {
     const data = await store.query(TABLE, { username: username });
-    console.log(data)
     const correct = await bcrypt.compare(password, data.password);
     if (correct) {
       //Generate token
-      return auth.sign({...data});
+      return auth.sign({ ...data });
     } else {
       throw error('Invalid information', 401);
     }
