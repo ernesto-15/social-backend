@@ -1,4 +1,3 @@
-const { format } = require('mysql');
 //*Dependencies
 //Nanoid
 const { nanoid } = require('nanoid');

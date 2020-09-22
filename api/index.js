@@ -11,6 +11,7 @@ const { api } = require('../config');
 const swaggerDocs = require('./swagger.json')
 //Routes
 const user = require('../api/components/user/network');
+const post = require('../api/components/post/network');
 const auth = require('../api/components/auth/network');
 //Errors
 const {error, notFound} = require('../network/error')
@@ -24,6 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 
 //*Router
 app.use('/api/user', user);
+app.use('/api/post', post);
 app.use('/api/auth', auth);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
