@@ -88,10 +88,10 @@ function query(table, query) {
 }
 
 async function upsert(table, data) {
-  if(!data.id) {
+  if (!data.id) {
     return insert(table, data);
   }
-  const row = await get(table, data.id)
+  const row = await get(table, data.id);
   if (row.length === 0) {
     return insert(table, data);
   } else {
@@ -104,4 +104,6 @@ module.exports = {
   get,
   upsert,
   query,
+  insert,
+  update,
 };
