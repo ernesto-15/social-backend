@@ -27,13 +27,21 @@ async function get(req, res, next) {
 }
 //Insert
 async function insert(req, res, next) {
-  const data = await store.insert(req.params.table, req.body);
-  response.success(req, res, data, 200);
+  try {
+    const data = await store.insert(req.params.table, req.body);
+    response.success(req, res, data, 200);
+  } catch (error) {
+    next(error)
+  }
 }
 //Upsert
 async function upsert(req, res, next) {
-  const data = await store.update(req.params.table, req.body);
-  response.success(req, res, data, 200);
+  try {
+    const data = await store.update(req.params.table, req.body);
+    response.success(req, res, data, 200);
+  } catch (error) {
+    next(error)
+  }
 }
 
 module.exports = router;

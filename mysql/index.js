@@ -7,6 +7,8 @@ const express = require('express');
 const { mysqlService } = require('../config');
 //Routes
 const router = require('./network');
+//Errors
+const {error, notFound} = require('../network/error')
 
 //Express initialization
 const app = express();
@@ -17,6 +19,10 @@ app.use(express.urlencoded({ extended: true }));
 
 //*Router
 app.use('/', router);
+
+//*Errors
+app.use(notFound)
+app.use(error)
 
 //*Serve Api
 app.listen(mysqlService.port, () => {

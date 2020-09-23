@@ -48,7 +48,8 @@ module.exports = (store = require('../../../store/dummy')) => {
 
   //Followers
   async function followers(id) {
-    return store.query(`${TABLE}_follow`, { user_to: id });
+    const sql = require('../../../store/mysql');
+    return sql.query(`${TABLE}_follow`, { user_to: id });
   }
 
   return {
