@@ -12,10 +12,13 @@ function createRemoteDB(host, port) {
     return req('GET', table, id);
   }
   function upsert(table, data) {
-    if(data.id) {
+    if (data.id) {
       return req('PUT', table, data);
     }
     return req('POST', table, data);
+  }
+  function redis(table, data) {
+    return req('PUT', table, data);
   }
   // function query(table, query) {}
 
@@ -49,6 +52,7 @@ function createRemoteDB(host, port) {
     list,
     get,
     upsert,
+    redis,
   };
 }
 

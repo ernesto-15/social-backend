@@ -9,10 +9,21 @@ const auth = require('../auth');
 const TABLE = 'users';
 
 //*Internal functions
-module.exports = (store = require('../../../store/dummy')) => {
+module.exports = (
+  store = require('../../../store/dummy'),
+  cache = require('../../../store/dummy')
+) => {
   //List
-  function list() {
-    return store.list(TABLE);
+  async function list() {
+    let users = await cache.list(TABLE);
+    if (!users) {
+      console.log('Cache empty')
+      users = await store.list(TABLE);
+      cache.redis(TABLE, users)
+    } else {
+      console.log('Data from cache')
+    }
+    return users
   }
 
   //Get
